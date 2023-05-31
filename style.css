@@ -7,8 +7,8 @@
   --card_width: 146px;
   --row_increment: 7px;
   --card_border_radius: 15px;
-  --card_small: 25;
-  --card_large: 30;
+  --card_small: 28;
+  --card_large: 33;
 }
 body {
   background-color: #1e1e1e;
@@ -21,7 +21,7 @@ nav {
   padding: 45px 18px;
 }
 
-nav .messageNav {
+nav .message {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -51,8 +51,6 @@ nav .user {
 }
 
 .messageAndSearch input {
-  background-color: white;
-  color: black;
   border-radius: 15px;
   width: 276px;
   height: 25px;
@@ -66,8 +64,8 @@ main {
   gap: 5vh;
 }
 
-.product img {
-  width: 124px;
+.products_container img {
+  width: 114px;
   height: 94px;
   border-radius: 15px;
   display: flex;
@@ -75,72 +73,53 @@ main {
   align-items: center;
 }
 
-.product {
+.products_container {
   margin: 0;
   padding: 0;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--card_width));
   grid-auto-rows: var(--row_increment);
-  column-gap: 7px;
   justify-content: center;
 }
 
-.product .btn {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
+.products_container button {
+  border-radius: 15px;
+  background-color: #d32760;
+  color: white;
+  font-size: 15px;
+  width: 50%;
 }
 
 .card_small {
   grid-row-end: span var(--card_small);
+  gap: 10px;
 }
 .card_large {
   grid-row-end: span var(--card_large);
-}
-
-.product1,
-.product4 {
-  background-color: #60606060;
-  border: 1px solid white;
-  /* width: 146px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 55px;
-  padding: 0;
-  margin: 15px 10px;
-  border-radius: var(--card_border_radius); */
-  margin: 15px 10px;
-}
-.product2,
-.product3 {
-  border: 1px solid white;
-  /* padding: 0;
-  margin: 15px 10px;
-  border-radius: var(--card_border_radius); */
-  background-color: #60606060;
-  /* width: 146px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   gap: 25px;
-  padding-top: 10px; */
+}
+
+.product {
+  background-color: #60606060;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  border-radius: var(--card_border_radius);
   margin: 15px 10px;
 }
 
-.product4 {
+.product:last-child {
   order: 3;
 }
 
-.product3 {
+.product:nth-child(3) {
   order: 4;
 }
 
-.product1:hover,
-.product2:hover,
-.product3:hover,
-.product4:hover {
+.product:hover {
   background-color: #606060fd;
 }
 
