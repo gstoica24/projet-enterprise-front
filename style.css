@@ -9,6 +9,7 @@
   --card_border_radius: 15px;
   --card_small: 28;
   --card_large: 33;
+  --card_extra_large: 46;
 }
 body {
   background-color: #1e1e1e;
@@ -64,7 +65,7 @@ main {
   gap: 5vh;
 }
 
-.products_container img {
+.imageProduct {
   width: 114px;
   height: 94px;
   border-radius: 15px;
@@ -83,7 +84,18 @@ main {
   justify-content: center;
 }
 
-.products_container button {
+.changeOnClick {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  justify-content: center;
+}
+
+article:not(.expandProduct) p {
+  display: none;
+}
+
+.buttonProduct {
   border-radius: 15px;
   background-color: #d32760;
   color: white;
@@ -100,26 +112,29 @@ main {
   gap: 25px;
 }
 
-.product {
+.expandProduct {
+  background-color: #606060fd;
+  grid-column: 1 / span 2;
+  width: 100%;
+  gap: 25px;
+}
+
+.expandImage {
+  width: 70%;
+  height: 50%;
+}
+
+.card {
   background-color: #60606060;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
   border-radius: var(--card_border_radius);
   margin: 15px 10px;
 }
 
-.product:last-child {
-  order: 3;
-}
-
-.product:nth-child(3) {
-  order: 4;
-}
-
-.product:hover {
+.card:hover {
   background-color: #606060fd;
 }
 
