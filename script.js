@@ -2,9 +2,9 @@ async function updateContent(url) {
   let response = await fetch(url);
   let data = await response.json();
 
-  console.log(data);
   let productsContainer = document.querySelector(".products_container");
   productsContainer.innerHTML = "";
+
   data.forEach((product, index) => {
     let element = document.createElement("article");
     element.classList.add("card");
@@ -28,24 +28,43 @@ async function updateContent(url) {
     let priceButton = document.createElement("button");
     priceButton.innerText = `${product.prix} €`;
     priceButton.classList.add("buttonProduct");
+
     let p = document.createElement("p");
     p.textContent = `${product.descripcion}`;
+    p.classList.add("description");
 
-    image.onclick = function () {
-      // let articles = document.querySelectorAll("article");
-      // articles.forEach(function (a) {
-      //   a.classList.remove("expandProduct");
-      // });
-      selectProduct(element);
-    };
-
-    function selectProduct(element) {
-      element.classList.toggle("expandProduct");
-      productsContainer.classList.toggle("changeOnClick");
-      element.classList.toggle("card_small");
-      element.classList.toggle("card_large");
-      image.classList.toggle("expandImage");
+    if (product.quantite == 0) {
+      priceButton.disabled = true;
+      priceButton.style.backgroundColor = "red";
+      image.style.opacity = "0.5";
     }
+
+    let elements = document.querySelectorAll("article");
+
+    function adjustProducts(element) {
+      let nextElement = element.nextElementSibling;
+      while (nextElement) {
+        nextElement.classList.toggle("shiftDown");
+        nextElement = nextElement.nextElementSibling;
+      }
+    }
+
+    elements.forEach((element) => {
+      const image = element.querySelector(".imageProduct");
+
+      image.addEventListener("click", function (event) {
+        const currentArticle = event.target.closest("article");
+        const isExpanded = currentArticle.classList.contains("expandProduct");
+
+        if (isExpanded) {
+          currentArticle.classList.remove("expandProduct");
+        } else {
+          currentArticle.classList.add("expandProduct");
+        }
+
+        adjustProducts(currentArticle);
+      });
+    });
 
     element.append(
       image,
@@ -57,8 +76,15 @@ async function updateContent(url) {
 
     priceButton.addEventListener("click", async function () {
       let productId = product.id;
+      let quantity = await consume(
+        "http://localhost:8080/api/products/consume?id=" + productId
+      );
 
-      consume("http://localhost:8080/api/products/consume?id=" + productId);
+      if (quantity == "0") {
+        priceButton.disabled = true;
+        priceButton.style.backgroundColor = "red";
+        image.style.opacity = "0.5";
+      }
     });
   });
 }
@@ -66,8 +92,7 @@ async function updateContent(url) {
 async function consume(url) {
   let response = await fetch(url);
   let data = await response.json();
-
-  console.log(data);
+  return data.quantite;
 }
 
 updateContent("http://localhost:8080/api/products");

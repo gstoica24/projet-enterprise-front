@@ -75,24 +75,11 @@ main {
 }
 
 .products_container {
-  margin: 0;
-  padding: 0;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--card_width));
   grid-auto-rows: var(--row_increment);
   justify-content: center;
-}
-
-.changeOnClick {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-  justify-content: center;
-}
-
-article:not(.expandProduct) p {
-  display: none;
 }
 
 .buttonProduct {
@@ -107,6 +94,7 @@ article:not(.expandProduct) p {
   grid-row-end: span var(--card_small);
   gap: 10px;
 }
+
 .card_large {
   grid-row-end: span var(--card_large);
   gap: 25px;
@@ -116,12 +104,22 @@ article:not(.expandProduct) p {
   background-color: #606060fd;
   grid-column: 1 / span 2;
   width: 100%;
-  gap: 25px;
+  height: 100%;
+  gap: 15px;
 }
 
-.expandImage {
-  width: 70%;
+.expandProduct .image {
+  width: 100%;
   height: 50%;
+}
+
+p {
+  display: none;
+}
+
+.expandProduct p {
+  display: block;
+  font-size: 12px;
 }
 
 .card {
@@ -132,6 +130,12 @@ article:not(.expandProduct) p {
   flex-direction: column;
   border-radius: var(--card_border_radius);
   margin: 15px 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card.shiftDown {
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(100px);
 }
 
 .card:hover {
