@@ -1,28 +1,51 @@
+let currentExpandedProduct = null;
+
+function expandProduct(element) {
+  if (currentExpandedProduct) {
+    currentExpandedProduct.classList.remove("expandProduct");
+    currentExpandedProduct.classList.add("card_small");
+    currentExpandedProduct.classList.remove("card_large");
+  }
+
+  element.classList.add("expandProduct");
+  element.classList.remove("card_small");
+  element.classList.add("card_large");
+  currentExpandedProduct = element;
+}
+
+function adjustProducts() {
+  const articles = document.querySelectorAll("article");
+
+  articles.forEach((article) => {
+    if (article !== currentExpandedProduct) {
+      article.classList.remove("expandProduct");
+      article.classList.add("card_small");
+      article.classList.remove("card_large");
+    }
+  });
+}
+
 async function updateContent(url) {
   let response = await fetch(url);
   let data = await response.json();
 
+  console.log(data);
   let productsContainer = document.querySelector(".products_container");
   productsContainer.innerHTML = "";
-
   data.forEach((product, index) => {
     let element = document.createElement("article");
     element.classList.add("card");
-    if (index % 4 == 0) {
+    element.classList.add("card_small");
+
+    if (index % 4 == 0 || index % 4 == 4) {
       element.classList.add("card_large");
-    } else if (index % 4 == 1) {
+    } else if (index % 4 == 2 || index % 4 == 3) {
       element.classList.add("card_small");
-    } else if (index % 4 == 2) {
-      element.classList.add("card_small");
-      element.style.order = "4";
-    } else if (index % 4 == 3) {
-      element.classList.add("card_large");
-      element.style.order = "3";
     }
 
     let image = document.createElement("img");
-    image.src = `${product.image}`;
-    image.alt = `${product.nom}`;
+    image.src = product.image;
+    image.alt = product.nom;
     image.classList.add("imageProduct");
 
     let priceButton = document.createElement("button");
@@ -30,57 +53,40 @@ async function updateContent(url) {
     priceButton.classList.add("buttonProduct");
 
     let p = document.createElement("p");
-    p.textContent = `${product.descripcion}`;
+    p.textContent = product.descripcion;
     p.classList.add("description");
 
-    if (product.quantite == 0) {
+    if (product.quantite === 0) {
       priceButton.disabled = true;
       priceButton.style.backgroundColor = "red";
       image.style.opacity = "0.5";
     }
 
-    let elements = document.querySelectorAll("article");
-
-    function adjustProducts(element) {
-      let nextElement = element.nextElementSibling;
-      while (nextElement) {
-        nextElement.classList.toggle("shiftDown");
-        nextElement = nextElement.nextElementSibling;
-      }
-    }
-
-    elements.forEach((element) => {
-      const image = element.querySelector(".imageProduct");
-
-      image.addEventListener("click", function (event) {
-        const currentArticle = event.target.closest("article");
-        const isExpanded = currentArticle.classList.contains("expandProduct");
-
-        if (isExpanded) {
-          currentArticle.classList.remove("expandProduct");
-        } else {
-          currentArticle.classList.add("expandProduct");
-        }
-
-        adjustProducts(currentArticle);
-      });
-    });
-
-    element.append(
-      image,
-      document.createTextNode(`${product.nom}`),
-      priceButton,
-      p
-    );
+    element.append(image, document.createTextNode(product.nom), priceButton, p);
     productsContainer.append(element);
+
+    image.addEventListener("click", function () {
+      const isExpanded = element.classList.contains("expandProduct");
+
+      if (isExpanded) {
+        element.classList.remove("expandProduct");
+        element.classList.add("card_small");
+        element.classList.remove("card_large");
+        currentExpandedProduct = null;
+      } else {
+        expandProduct(element);
+      }
+
+      adjustProducts();
+    });
 
     priceButton.addEventListener("click", async function () {
       let productId = product.id;
       let quantity = await consume(
-        "http://localhost:8080/api/products/consume?id=" + productId
+        `http://localhost:8080/api/products/consume?id=${productId}`
       );
 
-      if (quantity == "0") {
+      if (quantity === "0") {
         priceButton.disabled = true;
         priceButton.style.backgroundColor = "red";
         image.style.opacity = "0.5";
@@ -92,6 +98,7 @@ async function updateContent(url) {
 async function consume(url) {
   let response = await fetch(url);
   let data = await response.json();
+  console.log(data);
   return data.quantite;
 }
 

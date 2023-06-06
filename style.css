@@ -11,6 +11,7 @@
   --card_large: 33;
   --card_extra_large: 46;
 }
+
 body {
   background-color: #1e1e1e;
   color: white;
@@ -92,7 +93,7 @@ main {
 
 .card_small {
   grid-row-end: span var(--card_small);
-  gap: 10px;
+  gap: 5px;
 }
 
 .card_large {
@@ -100,17 +101,30 @@ main {
   gap: 25px;
 }
 
+@keyframes expandAnimation {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .expandProduct {
   background-color: #606060fd;
   grid-column: 1 / span 2;
   width: 100%;
   height: 100%;
-  gap: 15px;
+  gap: 5px;
+  z-index: 2;
+  animation: expandAnimation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.expandProduct .image {
-  width: 100%;
-  height: 50%;
+.card.shiftDown {
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(100px);
 }
 
 p {
@@ -120,6 +134,7 @@ p {
 .expandProduct p {
   display: block;
   font-size: 12px;
+  text-align: center;
 }
 
 .card {
@@ -130,12 +145,6 @@ p {
   flex-direction: column;
   border-radius: var(--card_border_radius);
   margin: 15px 10px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.card.shiftDown {
-  transition: transform 0.3s ease-in-out;
-  transform: translateY(100px);
 }
 
 .card:hover {
@@ -161,4 +170,15 @@ p {
 .navButtons button {
   background-color: rgba(255, 255, 255, 0);
   border: none;
+}
+
+@keyframes expand {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
