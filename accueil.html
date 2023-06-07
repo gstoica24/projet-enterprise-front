@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil - Application Alimentaire</title>
+    <link rel="stylesheet" type="text/css" href="style2.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Application Alimentaire</h1>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h2>Bienvenue sur notre application !</h2>
+          <p>
+            Connectez-vous pour découvrir nos produits alimentaires de qualité.
+          </p>
+          <form id="login-form">
+            <div class="form-group">
+              <label for="name">Nom :</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Votre nom"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="lastname">Prénom :</label>
+              <input
+                type="text"
+                id="lastname"
+                name="lastname"
+                placeholder="Votre prénom"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email :</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Votre email"
+                required
+              />
+            </div>
+            <button type="submit">Se connecter</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <nav>
+        <a href="accueil.html">
+          <img src="./imageButtons/home.png" alt="Produits" />
+          <span>Accueil</span>
+        </a>
+        <a href="#">
+          <img src="./imageButtons/favorite.png" alt="Favoris" />
+          <span>Favoris</span>
+        </a>
+        <a href="#">
+          <img src="./imageButtons/email.png" alt="Email" />
+          <span>Email</span>
+        </a>
+        <a href="index.html">
+          <img src="./imageButtons/foods.png" alt="Food" />
+          <span>Produits</span>
+        </a>
+      </nav>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

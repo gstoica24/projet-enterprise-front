@@ -1,30 +1,3 @@
-// let currentExpandedProduct = null;
-
-// function expandProduct(element) {
-//   if (currentExpandedProduct) {
-//     currentExpandedProduct.classList.remove("expandProduct");
-//     currentExpandedProduct.classList.add("card_small");
-//     currentExpandedProduct.classList.remove("card_large");
-//   }
-
-//   element.classList.add("expandProduct");
-//   element.classList.remove("card_small");
-//   element.classList.add("card_large");
-//   currentExpandedProduct = element;
-// }
-
-// function adjustProducts() {
-//   const articles = document.querySelectorAll("article");
-
-//   articles.forEach((article) => {
-//     if (article !== currentExpandedProduct) {
-//       article.classList.remove("expandProduct");
-//       article.classList.add("card_small");
-//       article.classList.remove("card_large");
-//     }
-//   });
-// }
-
 async function updateContent(url) {
   let response = await fetch(url);
   let data = await response.json();
@@ -64,21 +37,6 @@ async function updateContent(url) {
 
     element.append(image, document.createTextNode(product.nom), priceButton, p);
     productsContainer.append(element);
-
-    // image.addEventListener("click", function () {
-    //   const isExpanded = element.classList.contains("expandProduct");
-
-    //   if (isExpanded) {
-    //     element.classList.remove("expandProduct");
-    //     element.classList.add("card_small");
-    //     element.classList.remove("card_large");
-    //     currentExpandedProduct = null;
-    //   } else {
-    //     expandProduct(element);
-    //   }
-
-    //   adjustProducts();
-    // });
 
     image.addEventListener("click", function (event) {
       // Get <article> that's been clicked
