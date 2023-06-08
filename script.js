@@ -22,7 +22,7 @@ async function updateContent(url) {
     image.classList.add("imageProduct");
 
     let priceButton = document.createElement("button");
-    priceButton.innerText = `${product.prix} €`;
+    priceButton.innerText = `${product.prix}€`;
     priceButton.classList.add("buttonProduct");
 
     let p = document.createElement("p");

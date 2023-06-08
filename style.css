@@ -1,6 +1,7 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
@@ -11,6 +12,89 @@
   --card_large: 33;
   --card_extra_large: 46;
 }
+
+/* Styles from style2.css */
+
+.hPageAcc {
+  background-color: #d32760;
+  padding: 20px;
+  text-align: center;
+}
+
+.hPageAcc h1 {
+  color: #fff;
+  font-size: 24px;
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 600px;
+}
+
+.hero h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #fff;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff;
+  color: #333;
+}
+
+button {
+  background-color: #d32760;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #c22457;
+}
+
+footer {
+  background-color: #333;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+/*page produit*/
 
 body {
   background-color: #1e1e1e;
@@ -125,14 +209,15 @@ main {
   transform: translateY(100px);
 }
 
-p {
+.description {
   display: none;
 }
 
-.expandProduct p {
+.expandProduct .description {
   display: block;
-  font-size: 12px;
+  font-size: 10px;
   text-align: center;
+  width: 100%;
 }
 
 .card {
@@ -150,25 +235,42 @@ p {
   background-color: #606060fd;
 }
 
-.navButtons {
-  width: 374px;
-  height: 80px;
-  border-radius: 40px;
-  background-color: #60606060;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.footerProduit {
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0%;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0);
 }
 
-.navButtons div {
+.navButtons {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  background-color: #333333c5;
   width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0);
+  border-radius: 40px;
 }
 
-.navButtons button {
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
+.footerProduit a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  transition: color 0.3s ease;
+}
+
+.footerProduit a:hover {
+  color: #d32760;
+}
+
+.footerProduit img {
+  width: 30px;
+  height: 30px;
 }
 
 @keyframes expand {
